@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
 
     /** URL for earthquake data from the USGS dataset */
     private static final String API_REQUEST_URL =
-      "https://content.guardianapis.com/search";
+      "https://content.guardianapis.com/search?api-key=12db7c5e-96be-4c1e-939d-4f471104e3f0";
 
     /**
      * Constant value for the article loader ID. We can choose any integer.
@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity
                 Article currentArticle = mAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentArticle.getUrl());
+                Uri newsUri = Uri.parse(currentArticle.getUrl());
 
                 // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
