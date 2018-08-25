@@ -16,8 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Helper methods related to requesting and receiving earthquake data from USGS.
@@ -77,6 +81,21 @@ public final class QueryUtils {
         return url;
     }
 
+    /**
+     * Date Helper
+     */
+    private static String formatDate(String dateData) {
+        String guardianJsonDateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        SimpleDateFormat jsonDateFormatter = new SimpleDateFormat(guardianJsonDateFormat, Locale.GERMAN);
+        try {
+            Date jsonDateToParse = jsonDateFormatter.parse(dateData);
+            String resultDate = "MMM d, yyy";
+            SimpleDateFormat resultDateFormatter = new SimpleDateFormat(resultDate, Locale.GERMAN);
+            return resultDateFormatter.format(jsonDateToParse);
+        } catch (ParseException e) {
+            return "";
+        }
+    }
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -163,6 +182,7 @@ public final class QueryUtils {
 
                 String artSection = currentArticle.getString(KEY_SECTION_NAME);
                 String artDate = currentArticle.getString(KEY_DATE);
+                artDate = formatDate(artDate);
                 String artTitle = currentArticle.getString(KEY_TITLE);
                 String artUrl = currentArticle.getString(KEY_URL);
                 String artAuthor = currentArticle.getJSONArray(KEY_JSON_ARRAY_TAGS).getJSONObject(0).getString(KEY_TITLE);

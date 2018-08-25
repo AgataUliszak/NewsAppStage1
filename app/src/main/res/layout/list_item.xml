@@ -1,44 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent"
+    android:background="@color/layoutBackground"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_basic">
 
-    <RelativeLayout
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        card_view:cardBackgroundColor="@color/backgroundColor"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/padding_basic"
+        android:layout_marginLeft="@dimen/padding_basic"
+        android:layout_marginRight="@dimen/padding_basic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:padding="@dimen/padding_basic">
+        android:layout_height="@dimen/height"
+        card_view:cardCornerRadius="@dimen/padding_basic"
+        card_view:contentPadding="@dimen/padding_basic">
 
-        <TextView
-            android:id="@+id/section"
-            tools:text="Article Section"
-            android:background="@drawable/background_shape"
-            style="@style/text_style_basic"
-            android:gravity="bottom" />
-
-        <TextView
-            android:id="@+id/title"
-            style="@style/text_style_title"
-            android:padding="@dimen/padding_basic"/>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_basic">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
+                style="@style/text_style_basic"
+                android:id="@+id/section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                tools:text="@string/section" />
+
+            <TextView
+                style="@style/text_style_title"
+                android:layout_below="@id/section"
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="@string/title"
+                android:layout_marginBottom="@dimen/dimen_10" />
+
+            <TextView
+                style="@style/text_style_basic"
                 android:id="@+id/author"
-                style="@style/text_style_basic"
-                android:gravity="bottom" />
+                tools:text="@string/author"
+                android:layout_alignParentLeft="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/title"/>
 
             <TextView
-                android:id="@+id/date"
                 style="@style/text_style_basic"
-                android:gravity="end" />
-        </LinearLayout>
-
-    </RelativeLayout>
-</android.support.v7.widget.CardView>
+                android:id="@+id/date"
+                tools:text="@string/date"
+                android:layout_below="@id/title"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

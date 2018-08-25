@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             loaderManager.initLoader(ARTICLE_LOADER_ID, null, this);
+
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -151,13 +153,16 @@ public class MainActivity extends AppCompatActivity
 
 
         Uri baseUri = Uri.parse(API_REQUEST_URL);
+
         Uri.Builder builder = baseUri.buildUpon();
+        Log.e(LOG_TAG, "Error response code: " + builder);
+
 
         builder.appendQueryParameter(QUERY_SECTION_TAG, section);
         builder.appendQueryParameter(QUERY_CONTRIBUTOR_TAG, CONTRIBUTOR_VALUE);
         builder.appendQueryParameter(QUERY_DATE_TAG, date);
-        builder.appendQueryParameter(QUERY_API_KEY_TAG, API_KEY_VALUE);
-
+   //     builder.appendQueryParameter(QUERY_API_KEY_TAG, API_KEY_VALUE);
+        Log.i(LOG_TAG, "buider jest :" +builder.toString());
         return new ArticleLoader(this, builder.toString());
     }
 
